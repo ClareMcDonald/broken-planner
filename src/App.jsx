@@ -22,9 +22,9 @@ export default function App() {
             <Route path="/">
               <Redirect to="/entries" />
             </Route>
-              </Switch>
-            </BrowserRouter>
-        </PlannerProvider>
+          </Switch>
+        </BrowserRouter>
+      </PlannerProvider>
     </>
   );
 }
