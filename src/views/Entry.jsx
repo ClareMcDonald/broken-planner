@@ -8,7 +8,7 @@ import styles from './Entry.css';
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry, updateEntry } = useEntries();
+  const { entries, getEntry, updateEntry, deleteEntry } = useEntries();
   const [isEditing, setIsEditing] = useState(false);
 
   let content;
@@ -62,7 +62,8 @@ export default function Entry() {
         <p>Due: {entry?.date}</p>
         <p>{entry?.content}</p>
       </article>
-      {content} 
+      {content}
+      <button type='button' aria-label='delete button' onClick={() => deleteEntry(entry.id)}>Delete</button>
     </>
   );
 }

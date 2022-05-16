@@ -59,13 +59,18 @@ const PlannerProvider = ({ children }) => {
     dispatch({ type: 'update', payload: { id } })
   };
 
+  const deleteEntry = (id) => {
+    dispatch({ type: 'delete', payload: { id } })
+  }
+
   return (
     <PlannerContext.Provider
       value={{
         entries,
         addEntry,
         getEntry,
-        updateEntry
+        updateEntry,
+        deleteEntry
       }}
     >
       {children}
