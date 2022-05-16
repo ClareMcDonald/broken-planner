@@ -15,7 +15,7 @@ export default function Entry() {
 
   useEffect(() => {
     setEntry(getEntry(id));
-  }, [id, entries.length]);
+  }, [id, entries]);
 
   if (isEditing) {
     content = (
@@ -28,14 +28,6 @@ export default function Entry() {
           onChange={(e) => updateEntry({ ...entry, title: e.target.value })}
           className={styles.input}
         />
-        {/* <input
-          type="date"
-          name="date"
-          aria-label="Due date"
-          value={entry.date || ''}
-          onChange={(e) => updateEntry({ ...entry, date: e.target.value })}
-          className={styles.input}
-        /> */}
         <textarea
           name="content"
           placeholder="A brief description of what you're planning"
