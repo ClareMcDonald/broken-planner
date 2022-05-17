@@ -4,24 +4,27 @@ import Header from './components/Header/Header';
 import Entry from './views/Entry';
 
 import './App.css';
+import { PlannerProvider } from './context/PlannerContext';
 
 export default function App() {
   return (
     <> {/* TODO: Add PlannerProvider */}
-      <Header />
-      <BrowserRouter>
-        <Switch>
-          <Route path="/entries/:id">
-            <Entry />
-          </Route>
-          <Route path="/entries">
-            <Planner />
-          </Route>
-          <Route path="/">
-            <Redirect to="/entries" />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <PlannerProvider>
+        <Header />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/entries/:id">
+              <Entry />
+            </Route>
+            <Route path="/entries">
+              <Planner />
+            </Route>
+            <Route path="/">
+              <Redirect to="/entries" />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </PlannerProvider>
     </>
   );
 }

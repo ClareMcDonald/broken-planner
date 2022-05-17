@@ -8,11 +8,41 @@ import styles from './Entry.css';
 export default function Entry() {
   const { id } = useParams();
   const [entry, setEntry] = useState({});
-  const { entries, getEntry } = useEntries();
+  const { entries, getEntry, updateEntry, deleteEntry } = useEntries();
+  const [isEditing, setIsEditing] = useState(false);
+
+  let content;
 
   useEffect(() => {
     setEntry(getEntry(id));
-  }, [id, entries.length]);
+  }, [id, entries]);
+
+  if (isEditing) {
+    content = (
+      <form onSubmit={(e) => { e.preventDefault(); setIsEditing(false); }} className={styles.form}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Plan something"
+          value={entry.title}
+          onChange={(e) => updateEntry({ ...entry, title: e.target.value })}
+          className={styles.input}
+        />
+        <textarea
+          name="content"
+          placeholder="A brief description of what you're planning"
+          value={entry.content}
+          onChange={(e) => updateEntry({ ...entry, content: e.target.value })}
+          className={styles.content}
+        />
+        <button type="submit edits">Save Edits</button>
+      </form>
+    )
+  } else {
+    content = (
+      <button type='button' aria-label='edit button' onClick={() => setIsEditing(true)}>Edit</button>
+    )
+  }
 
   return (
     <>
@@ -24,6 +54,8 @@ export default function Entry() {
         <p>Due: {entry?.date}</p>
         <p>{entry?.content}</p>
       </article>
+      {content}
+      <button type='button' aria-label='delete button' onClick={() => deleteEntry(entry.id)}>Delete</button>
     </>
   );
 }
